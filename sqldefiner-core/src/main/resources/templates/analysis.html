@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+</head>
+<style>
+    table {
+        width: 100%;
+        max-width: 95%;
+        margin: 0 auto;
+        border-radius: 15px 15px 2px 2px;
+        border-collapse: collapse;
+        border-style: hidden;
+        box-shadow: 0 0 0 1px #0e0e0e;
+    }
+
+    th,
+    td {
+        border: 1px solid #260c0c;
+        padding: 10px;
+    }
+</style>
+<body>
+<table>
+    <tr>
+        <th>执行SQL</th>
+        <th>执行计划</th>
+        <th>分析</th>
+    </tr>
+    <div th:each="item : ${items}">
+        <tr th:each="element, i : ${item.plans}" th:with="rowspan=${item.plans.size()}">
+            <td th:if="${i.index eq 0}" th:rowspan="${rowspan}" th:text="${item.sql}"></td>
+            <td th:utext="${element}"></td>
+            <td th:utext="${item.analysis[i.index]}"></td>
+        </tr>
+    </div>
+
+
+</table>
+</body>
+</html>
